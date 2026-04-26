@@ -64,6 +64,7 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  flex-shrink: 0;
 }
 
 .task-info {
@@ -276,4 +277,20 @@ button[data-destroy] {
 
 #categories ul li:hover {
   background-color: #e7e9fc;
+}
+
+/* Стилізація посилання "Назад" */
+a[href='./index.html'],
+.go-back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #4e75ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+a[href='./index.html']:hover {
+  color: #2e4bc0;
+  text-decoration: underline;
 }
