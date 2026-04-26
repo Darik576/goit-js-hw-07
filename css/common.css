@@ -1,107 +1,132 @@
+/* --- БАЗОВІ НАЛАШТУВАННЯ --- */
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 16px;
+  margin: 0;
+  padding: 16px;
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
 }
 
-/* Базові стилі для контейнера галереї */
-.gallery {
-  display: flex;
-  flex-wrap: wrap; /* Дозволяємо перенос на нові рядки */
-  gap: 24px; /* Відступи між картками */
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* --- ГОЛОВНА СТОРІНКА (INDEX) --- */
+.main-container {
+  max-width: 900px;
+  margin: 60px auto;
+  text-align: center;
 }
 
-/* * СТИЛІ ДЛЯ МОБІЛЬНИХ (за замовчуванням)
- * На маленьких екранах кожна картинка займає всю ширину (1 колонка)
- */
+.main-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.main-header p {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.task-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.task-card a {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  gap: 15px;
+}
+
+.task-number {
+  width: 50px;
+  height: 50px;
+  background: #f0f4ff;
+  color: #4e75ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.task-info {
+  text-align: left;
+}
+.task-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.task-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: #4e75ff;
+}
+
+/* --- ЗАВДАННЯ 1 (ГАЛЕРЕЯ) --- */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+}
+
 .gallery-item {
   flex-basis: 100%;
 }
-
-/* Базові стилі для самих зображень */
 .gallery-img {
   display: block;
   width: 100%;
-
-  /* * ЗМІНА 1: Замість фіксованої висоти (300px), 
-   * використовуємо aspect-ratio, щоб зберігати пропорції квадратів.
-   */
   aspect-ratio: 1 / 1;
-
-  object-fit: cover; /* Залишаємо, щоб картинка не сплющувалась */
+  object-fit: cover;
 }
 
-/* * МЕДІА-ЗАПИТ ДЛЯ ПЛАНШЕТІВ (ширина екрана від 480px)
- * Тут ми перемикаємося на 2 колонки
- */
-@media screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .gallery-item {
-    /* (100% - 1 gap) / 2 колонки */
     flex-basis: calc((100% - 24px) / 2);
   }
 }
-
-/* * МЕДІА-ЗАПИТ ДЛЯ ДЕСКТОПІВ (ширина екрана від 768px)
- * Тут ми перемикаємося на 3 колонки (як на image_0.png)
- */
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .gallery-item {
-    /* (100% - 2 gaps) / 3 колонки */
     flex-basis: calc((100% - 48px) / 3);
   }
 }
 
-/* --- Стилі для Завдання 3 --- */
-
-#name-input {
-  width: 312px;
-  padding: 12px 16px;
-  font-size: 16px;
-  border: 1px solid #8e8f99;
-  border-radius: 4px;
-  outline: none;
-  margin-top: 20px;
-  transition: border-color 0.3s ease;
-}
-
-#name-input:focus {
-  border-color: #4e75ff;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-top: 24px;
-}
-
-#name-output {
-  color: #4e75ff;
-}
-
+/* --- ЗАВДАННЯ 2 ТА 3 (ІНПУТ ТА ФОРМА) --- */
 .centered-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 50vh; /* Займе половину висоти екрана */
+  margin-top: 50px;
 }
 
+#name-input,
 .login-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Головний напрямок — стовпчик */
   gap: 16px;
   max-width: 320px;
   margin-top: 20px;
@@ -109,9 +134,10 @@ h1 {
 
 .login-form label {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Назва (Email/Password) буде НАД інпутом */
   gap: 8px;
   font-weight: 500;
+  width: 100%; /* Щоб лейбл займав усю ширину форми */
 }
 
 .login-form input {
@@ -119,151 +145,135 @@ h1 {
   border: 1px solid #8e8f99;
   border-radius: 4px;
   outline: none;
+  width: 100%; /* Інпут заповнює ширину свого лейбла */
 }
-
-.login-form input:focus {
-  border-color: #4e75ff;
-}
-
 .login-form button {
   width: fit-content;
-  padding: 8px 16px;
-  background-color: #4e75ff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-.login-form button:hover {
-  background-color: #2e4bc0;
-}
-
-.widget {
-  text-align: center;
-  padding: 24px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-  margin: 100px auto;
-}
-
-.widget p {
-  font-size: 18px;
-  margin-bottom: 16px;
-}
-
-.color {
-  font-family: monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.change-color {
-  padding: 10px 20px;
-  background-color: #4e75ff;
+  background: #4e75ff;
   color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
 }
 
-.change-color:hover {
-  background-color: #2e4bc0;
+#name-output {
+  color: #4e75ff;
 }
 
-/* Головний контейнер-картка */
-.container {
-  background-color: #ffffff;
-  padding: 32px;
+/* --- ЗАВДАННЯ 4 (ВІДЖЕТ КОЛЬОРУ) --- */
+.widget {
+  text-align: center;
+  padding: 40px;
+  background: white;
   border-radius: 12px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05); /* М'яка тінь */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  max-width: 300px;
+}
+
+/* --- ЗАВДАННЯ 5 ТА 6 (КОРОБКИ) --- */
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   max-width: 500px;
   margin: 40px auto;
-  border: 1px solid #f0f0f0;
 }
 
-/* Блок з кнопками та інпутом */
 #controls {
   display: flex;
-  align-items: center;
+  gap: 10px;
   justify-content: center;
-  gap: 16px;
-  background-color: #f8faff; /* Світло-блакитний фон */
-  padding: 24px;
-  border-radius: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #f8faff;
+  border-radius: 10px;
 }
 
-/* Стиль інпуту */
 #controls input {
-  width: 120px;
-  height: 44px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 0 12px;
-  font-size: 16px;
-  text-align: center;
-  outline: none;
-  transition: border-color 0.2s;
+  width: 70px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-#controls input:focus {
-  border-color: #4e75ff;
-}
-
-/* Спільні стилі для кнопок */
-button {
-  height: 44px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 0.1s,
-    opacity 0.2s;
-}
-
-button:active {
-  transform: scale(0.97); /* Ефект натискання */
-}
-
-/* Кнопка Create (Синя) */
 button[data-create] {
-  background-color: #4e75ff;
+  background: #4e75ff;
   color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
-button[data-create]:hover {
-  opacity: 0.9;
-}
-
-/* Кнопка Destroy (Червона) */
 button[data-destroy] {
-  background-color: #ff4e4e;
+  background: #ff4e4e;
   color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-button[data-destroy]:hover {
-  opacity: 0.9;
-}
-
-/* Контейнер для квадратів */
 #boxes {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
-  align-items: center;
-  background-color: #f8faff;
+  align-items: flex-end;
+  min-height: 50px;
+}
+
+/* Контейнер для всього списку */
+#categories {
+  list-style: none;
   padding: 24px;
+  background-color: #f8faff;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Картка окремої категорії (Animals, Products тощо) */
+#categories .item {
+  background-color: #ffffff;
+  padding: 16px;
   border-radius: 8px;
-  min-height: 100px; /* Щоб блок не зникав зовсім, коли порожній */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Заголовок категорії */
+#categories h2 {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2e2f42;
+}
+
+/* Внутрішній список елементів */
+#categories ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Окремий елемент списку (наприклад, Cat або Bread) */
+#categories ul li {
+  padding: 10px 12px;
+  background-color: #f4f4fd; /* Світлий фон як на фото */
+  border: 1px solid #e7e9fc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #434455;
+  transition: background-color 0.2s ease;
+}
+
+#categories ul li:hover {
+  background-color: #e7e9fc;
 }
